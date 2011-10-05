@@ -164,10 +164,10 @@ module BinaryPlist
           #  append_values(object.to_s, values, ref_format)
 
           else
-            if defined? BSON::ObjectId and object.instance_of? BSON::ObjectId
+            if defined?(BSON::ObjectId) && object.instance_of?(BSON::ObjectId)
               append_values(object.to_s, values, ref_format)
-            elsif object.respond_to?(:to_plist_node)
-              append_values(object.to_plist_node, values, ref_format)
+            elsif object.respond_to?(:to_bplist_node)
+              append_values(object.to_bplist_node, values, ref_format)
             else
               raise "Couldn't serialize value of class #{object.class.name}"
             end

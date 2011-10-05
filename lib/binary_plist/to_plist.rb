@@ -9,6 +9,10 @@ ActiveRecord::Base.class_eval <<-RUBY, __FILE__, __LINE__
     x = h.delete_if { |k,v| v.nil? }
     Plist::Emit.plist_node(x)
   end
+  def to_bplist_node
+    h = self.serializable_hash
+    x = h.delete_if { |k,v| v.nil? }
+  end
 RUBY
 
 BinaryPlist::Encoding::SUPPORTED_CLASSES.each do |klass|
