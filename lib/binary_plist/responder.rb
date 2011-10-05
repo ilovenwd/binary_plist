@@ -11,7 +11,7 @@ end
 module Plist
   module PlistResponder
     def to_format
-	  Plist::Emit.dump resource
+	  Plist::Emit.dump resource.as_json
     end
   end
 end

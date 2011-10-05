@@ -7,7 +7,7 @@ BinaryPlist::Encoding::SUPPORTED_CLASSES.each do |klass|
     end
 
     def to_plist(options = nil)
-	  Plist::Emit.dump(self)
+	  Plist::Emit.dump(self.as_json)
     end
   RUBY
 end
