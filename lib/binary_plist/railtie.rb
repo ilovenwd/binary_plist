@@ -25,15 +25,11 @@ module BinaryPlist
       Mime::Type.register Plist::MIME_TYPE, :plist
       
       ActionController::Renderers.add :bplist do |data, options|
-        data = data.as_json(options)
-      
         self.content_type ||= Mime::BPLIST
         self.response_body = BinaryPlist.encode(data)
       end
 
       ActionController::Renderers.add :plist do |data, options|
-        data = data.as_json(options)
-
         self.content_type ||= Mime::PLIST
         self.response_body = Plist::Emit.dump(data)
       end

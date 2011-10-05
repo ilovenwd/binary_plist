@@ -18,7 +18,7 @@ module BinaryPlist
     if defined? BSON::ObjectId
       SUPPORTED_CLASSES.push BSON::ObjectId
     end
-    
+
     # Difference between Apple and UNIX timestamps
     DATE_EPOCH_OFFSET_APPLE_UNIX = 978307200
 
@@ -164,7 +164,11 @@ module BinaryPlist
             append_values(object.to_s, values, ref_format)
 
           else
-            raise "Couldn't serialize value of class #{object.class.name}"
+            if object.respond_to?(:to_plist_node)
+              append_values(object.to_plist_node, values, ref_format)
+            else
+              raise "Couldn't serialize value of class #{object.class.name}"
+            end
         end
       end
 

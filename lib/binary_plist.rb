@@ -8,5 +8,5 @@ module BinaryPlist
 end
 
 module Plist
-  MIME_TYPE = 'text/plist'
+  MIME_TYPE = 'text/xml'
 end
