@@ -6,3 +6,7 @@ require 'iconv'
 module BinaryPlist
   MIME_TYPE = 'application/octet-stream'
 end
+
+module Plist
+  MIME_TYPE = 'text/plist'
+end
