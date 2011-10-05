@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.require_path = 'lib'
   
   s.add_dependency('activesupport', '> 2.0')
+  s.add_dependency('plist', '> 3.1.0')
   s.add_development_dependency('rspec', '2.4.0')
   s.add_development_dependency('rake')
   s.add_development_dependency('mongoid')

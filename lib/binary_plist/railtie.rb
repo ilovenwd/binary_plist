@@ -1,4 +1,5 @@
 require 'binary_plist'
+require 'plist'
 
 module BinaryPlist
   autoload :BinaryPlistResponder, 'binary_plist/responder'
@@ -20,13 +21,19 @@ module BinaryPlist
 
   class Railtie
     def self.insert
-      Mime::Type.register BinaryPlist::MIME_TYPE, :plist
+      Mime::Type.register BinaryPlist::MIME_TYPE, :bplist
+      Mime::Type.register 'text/plist', :plist
       
-      ActionController::Renderers.add :plist do |data, options|
+      ActionController::Renderers.add :bplist do |data, options|
         data = data.as_json(options)
       
-        self.content_type ||= Mime::PLIST
+        self.content_type ||= Mime::BPLIST
         self.response_body = BinaryPlist.encode(data)
+      end
+
+      ActionController::Renderers.add :plist do |data, options|
+        self.content_type ||= Mime::PLIST
+        self.response_body = Plist::Emit.dump(data)
       end
     end
   end
